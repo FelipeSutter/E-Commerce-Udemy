@@ -1,6 +1,7 @@
 package com.projeto.ecommerceudemy.model;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Pedido {
@@ -24,8 +26,11 @@ public class Pedido {
 
     private Double valorTotal;
 
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itensPedidos;
+
     @ManyToOne
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
     private Cliente cliente;
 
     public Long getId() {
@@ -68,7 +73,12 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    // TODO: Relacionamento 1:N de pedido para itemPedido
-    // TODO: Fazer a entidade itemPedido
+    public List<ItemPedido> getItensPedidos() {
+        return itensPedidos;
+    }
+
+    public void setItensPedidos(List<ItemPedido> itensPedidos) {
+        this.itensPedidos = itensPedidos;
+    }
 
 }

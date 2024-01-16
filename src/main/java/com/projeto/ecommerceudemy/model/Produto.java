@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Produto {
@@ -31,6 +32,9 @@ public class Produto {
     private Date dataCadastro = new Date();
 
     private String observacao;
+
+    @OneToMany(mappedBy = "produto")
+    private List<ItemPedido> itensPedidos;
 
     @ManyToMany
     @JoinTable(name = "produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
@@ -100,7 +104,12 @@ public class Produto {
         this.categorias = categorias;
     }
 
-    // TODO: Relacionamento 1:N de produto para itemPedido
-    // TODO: Relacionamento N:N de produto para categoria
+    public List<ItemPedido> getItensPedidos() {
+        return itensPedidos;
+    }
+
+    public void setItensPedidos(List<ItemPedido> itensPedidos) {
+        this.itensPedidos = itensPedidos;
+    }
 
 }
