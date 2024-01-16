@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Pedido {
@@ -21,6 +23,10 @@ public class Pedido {
     private Double descontoTotal;
 
     private Double valorTotal;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id", nullable = false)
+    private Cliente cliente;
 
     public Long getId() {
         return id;
@@ -52,6 +58,14 @@ public class Pedido {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     // TODO: Relacionamento 1:N de pedido para itemPedido
