@@ -1,12 +1,16 @@
 package com.projeto.ecommerceudemy.model;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Produto {
@@ -27,6 +31,10 @@ public class Produto {
     private Date dataCadastro = new Date();
 
     private String observacao;
+
+    @ManyToMany
+    @JoinTable(name = "produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    private List<Categoria> categorias;
 
     public Long getId() {
         return id;
@@ -82,6 +90,14 @@ public class Produto {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
     // TODO: Relacionamento 1:N de produto para itemPedido
