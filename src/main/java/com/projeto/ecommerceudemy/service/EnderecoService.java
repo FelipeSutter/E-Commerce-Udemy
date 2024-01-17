@@ -54,6 +54,8 @@ public class EnderecoService {
 
         Endereco endereco = modelMapper.map(enderecoDTO, Endereco.class);
 
+        endereco = getEnderecoByCep(endereco);
+
         endereco = repository.save(endereco);
 
         enderecoDTO.setId(endereco.getId());
