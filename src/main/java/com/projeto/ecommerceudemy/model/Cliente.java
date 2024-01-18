@@ -23,8 +23,10 @@ public class Cliente {
 
     private String nome;
 
+    @Column(unique = true)
     private String cpf;
 
+    @Column(unique = true)
     private String email;
 
     @OneToOne

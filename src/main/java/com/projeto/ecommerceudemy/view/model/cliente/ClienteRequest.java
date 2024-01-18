@@ -1,9 +1,6 @@
 package com.projeto.ecommerceudemy.view.model.cliente;
 
-import java.util.List;
-
 import com.projeto.ecommerceudemy.model.Endereco;
-import com.projeto.ecommerceudemy.model.Pedido;
 
 public class ClienteRequest {
 
@@ -14,8 +11,6 @@ public class ClienteRequest {
     private String email;
 
     private Endereco endereco;
-
-    private List<Pedido> pedidos;
 
     public String getNome() {
         return nome;
@@ -47,14 +42,6 @@ public class ClienteRequest {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
-    }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
     }
 
 }
