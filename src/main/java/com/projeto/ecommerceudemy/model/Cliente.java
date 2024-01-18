@@ -31,10 +31,11 @@ public class Cliente {
 
     @OneToOne
     @JoinColumn(name = "endereco_id", referencedColumnName = "endereco_id", unique = true)
-    @JsonManagedReference
+    // @JsonManagedReference
     private Endereco endereco;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
     private List<Pedido> pedidos;
 
     public Long getId() {
