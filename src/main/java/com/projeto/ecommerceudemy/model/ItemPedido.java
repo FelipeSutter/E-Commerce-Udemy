@@ -1,5 +1,7 @@
 package com.projeto.ecommerceudemy.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,10 +24,12 @@ public class ItemPedido {
 
     @ManyToOne
     @JoinColumn(name = "pedido_id", referencedColumnName = "pedido_id")
+    @JsonBackReference
     private Pedido pedido;
 
     @ManyToOne
     @JoinColumn(name = "produto_id", referencedColumnName = "produto_id")
+    @JsonBackReference
     private Produto produto;
 
     public Long getId() {
