@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projeto.ecommerceudemy.model.ItemPedido;
 import com.projeto.ecommerceudemy.model.Pedido;
 import com.projeto.ecommerceudemy.repository.PedidoRepository;
 import com.projeto.ecommerceudemy.shared.PedidoDTO;
@@ -86,6 +87,21 @@ public class PedidoService {
         }
 
         repository.deleteById(id);
+
+    }
+
+    public void gerarValorTotal(Pedido pedido) {
+        Double valorTotal = 0.0;
+
+        if (pedido.getItensPedidos().isEmpty()) {
+            new RuntimeException("Não existe item pedido para esse pedido");
+        } else {
+            for (ItemPedido itemPedido : pedido.getItensPedidos()) {
+                valorTotal = valorTotal + itemPedido.getProduto().getValorVenda();
+            }
+            pedido.setValorTotal(valorTotal);
+            repository.save(pedido);
+        }
 
     }
 }

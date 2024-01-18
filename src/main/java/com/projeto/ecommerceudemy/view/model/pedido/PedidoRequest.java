@@ -10,6 +10,8 @@ public class PedidoRequest {
 
     private Cliente cliente;
 
+    // TODO: Descobrir pq esta dando erro de deserialization.
+
     public Double getDescontoTotal() {
         return descontoTotal;
     }

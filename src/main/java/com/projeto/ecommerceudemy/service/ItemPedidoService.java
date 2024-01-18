@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projeto.ecommerceudemy.model.ItemPedido;
+import com.projeto.ecommerceudemy.model.Produto;
 import com.projeto.ecommerceudemy.repository.ItemPedidoRepository;
+import com.projeto.ecommerceudemy.repository.PedidoRepository;
+import com.projeto.ecommerceudemy.repository.ProdutoRepository;
 import com.projeto.ecommerceudemy.shared.ItemPedidoDTO;
 
 @Service
@@ -20,6 +23,15 @@ public class ItemPedidoService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private PedidoService pedidoService;
 
     public List<ItemPedidoDTO> findAll() {
         List<ItemPedido> itensPedidos = repository.findAll();
@@ -46,11 +58,23 @@ public class ItemPedidoService {
 
     public ItemPedidoDTO create(ItemPedidoDTO itemPedidoDTO) {
 
+        Produto produto = produtoRepository.findById(itemPedidoDTO.getProduto().getId()).orElse(null);
+
         itemPedidoDTO.setId(null);
+
+        if (produto.getEstoque() >= itemPedidoDTO.getQuantidade()) {
+            Integer qtd = produto.getEstoque() - itemPedidoDTO.getQuantidade();
+            produto.setEstoque(qtd);
+        } else {
+            new RuntimeException("Não há estoque o suficiente");
+            return null;
+        }
 
         ItemPedido itemPedido = modelMapper.map(itemPedidoDTO, ItemPedido.class);
 
         itemPedido = repository.save(itemPedido);
+
+        pedidoService.gerarValorTotal(pedidoRepository.findById(itemPedido.getPedido().getId()).orElse(null));
 
         itemPedidoDTO.setId(itemPedido.getId());
 
