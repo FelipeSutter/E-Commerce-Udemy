@@ -65,12 +65,12 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PedidoResponse> atualizar(@RequestBody PedidoRequest PedidoRequest,
+    public ResponseEntity<PedidoResponse> atualizar(@RequestBody PedidoRequest pedidoRequest,
             @PathVariable Long id) {
 
         // Mesma coisa que o atualizar, a diferença é o método que passa o id do
         // Pedido.
-        PedidoDTO dto = mapper.map(PedidoRequest, PedidoDTO.class);
+        PedidoDTO dto = mapper.map(pedidoRequest, PedidoDTO.class);
 
         dto = service.update(id, dto);
 

@@ -65,12 +65,12 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClienteResponse> atualizar(@RequestBody ClienteRequest ClienteRequest,
+    public ResponseEntity<ClienteResponse> atualizar(@RequestBody ClienteRequest clienteRequest,
             @PathVariable Long id) {
 
         // Mesma coisa que o atualizar, a diferença é o método que passa o id do
         // Cliente.
-        ClienteDTO dto = mapper.map(ClienteRequest, ClienteDTO.class);
+        ClienteDTO dto = mapper.map(clienteRequest, ClienteDTO.class);
 
         dto = service.update(id, dto);
 

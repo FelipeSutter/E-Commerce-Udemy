@@ -65,12 +65,12 @@ public class EnderecoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EnderecoResponse> atualizar(@RequestBody EnderecoRequest EnderecoRequest,
+    public ResponseEntity<EnderecoResponse> atualizar(@RequestBody EnderecoRequest enderecoRequest,
             @PathVariable Long id) {
 
         // Mesma coisa que o atualizar, a diferença é o método que passa o id do
         // Endereco.
-        EnderecoDTO dto = mapper.map(EnderecoRequest, EnderecoDTO.class);
+        EnderecoDTO dto = mapper.map(enderecoRequest, EnderecoDTO.class);
 
         dto = service.update(id, dto);
 
