@@ -35,7 +35,7 @@ public class Cliente {
     private Endereco endereco;
 
     @OneToMany(mappedBy = "cliente")
-    @JsonManagedReference
+    @JsonManagedReference(value = "cliente-mng")
     private List<Pedido> pedidos;
 
     public Long getId() {

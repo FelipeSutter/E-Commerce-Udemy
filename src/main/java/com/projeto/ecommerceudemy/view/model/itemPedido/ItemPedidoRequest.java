@@ -1,6 +1,5 @@
 package com.projeto.ecommerceudemy.view.model.itemPedido;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.projeto.ecommerceudemy.model.Pedido;
 import com.projeto.ecommerceudemy.model.Produto;
 
@@ -10,10 +9,8 @@ public class ItemPedidoRequest {
 
     private Double desconto;
 
-    @JsonBackReference
     private Pedido pedido;
 
-    @JsonBackReference
     private Produto produto;
 
     public Integer getQuantidade() {

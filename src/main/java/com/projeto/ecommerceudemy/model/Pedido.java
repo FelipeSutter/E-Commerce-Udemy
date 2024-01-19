@@ -30,12 +30,12 @@ public class Pedido {
     private Double valorTotal;
 
     @OneToMany(mappedBy = "pedido")
-    @JsonManagedReference
+    @JsonManagedReference(value = "pedido-mng")
     private List<ItemPedido> itensPedidos;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
-    @JsonBackReference
+    @JsonBackReference(value = "cliente-mng")
     private Cliente cliente;
 
     public Long getId() {

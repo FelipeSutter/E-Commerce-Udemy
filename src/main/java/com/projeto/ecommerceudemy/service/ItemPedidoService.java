@@ -72,9 +72,9 @@ public class ItemPedidoService {
 
         ItemPedido itemPedido = modelMapper.map(itemPedidoDTO, ItemPedido.class);
 
-        itemPedido = repository.save(itemPedido);
-
         pedidoService.gerarValorTotal(pedidoRepository.findById(itemPedido.getPedido().getId()).orElse(null));
+
+        itemPedido = repository.save(itemPedido);
 
         itemPedidoDTO.setId(itemPedido.getId());
 

@@ -36,7 +36,7 @@ public class Produto {
     private String observacao;
 
     @OneToMany(mappedBy = "produto")
-    @JsonManagedReference
+    @JsonManagedReference(value = "produto-mng")
     private List<ItemPedido> itensPedidos;
 
     @ManyToMany

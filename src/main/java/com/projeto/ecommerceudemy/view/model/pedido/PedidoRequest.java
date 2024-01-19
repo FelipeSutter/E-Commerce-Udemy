@@ -1,6 +1,5 @@
 package com.projeto.ecommerceudemy.view.model.pedido;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.projeto.ecommerceudemy.model.Cliente;
 
 public class PedidoRequest {
@@ -9,7 +8,6 @@ public class PedidoRequest {
 
     private Double valorTotal;
 
-    @JsonBackReference
     private Cliente cliente;
 
     // TODO: Descobrir pq esta dando erro de deserialization.
