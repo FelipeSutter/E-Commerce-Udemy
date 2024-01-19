@@ -104,4 +104,7 @@ public class PedidoService {
         }
 
     }
+
+    // TODO: Fazer um método para calcular o desconto total, tambem incluir a adição
+    // da qtd dos itens escolhidos na compra
 }

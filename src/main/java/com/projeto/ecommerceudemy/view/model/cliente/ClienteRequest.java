@@ -1,5 +1,6 @@
 package com.projeto.ecommerceudemy.view.model.cliente;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.projeto.ecommerceudemy.model.Endereco;
 
 public class ClienteRequest {
@@ -10,6 +11,7 @@ public class ClienteRequest {
 
     private String email;
 
+    @JsonManagedReference
     private Endereco endereco;
 
     public String getNome() {
