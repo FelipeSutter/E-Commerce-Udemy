@@ -92,14 +92,18 @@ public class PedidoService {
 
     public void gerarValorTotal(Pedido pedido) {
         Double valorTotal = 0.0;
+        Double descontoTotal = 0.0;
 
         if (pedido.getItensPedidos().isEmpty()) {
             new RuntimeException("Não existe item pedido para esse pedido");
         } else {
             for (ItemPedido itemPedido : pedido.getItensPedidos()) {
-                valorTotal = valorTotal + itemPedido.getProduto().getValorVenda();
+                valorTotal = valorTotal + (itemPedido.getProduto().getValorVenda() * itemPedido.getQuantidade());
+                descontoTotal = descontoTotal + itemPedido.getDesconto();
             }
+            valorTotal = valorTotal - descontoTotal;
             pedido.setValorTotal(valorTotal);
+            pedido.setDescontoTotal(descontoTotal);
             repository.save(pedido);
         }
 

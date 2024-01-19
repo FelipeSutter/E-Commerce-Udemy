@@ -66,6 +66,9 @@ public class ItemPedidoService {
             Integer qtd = produto.getEstoque() - itemPedidoDTO.getQuantidade();
             produto.setEstoque(qtd);
         } else {
+
+            // TODO: Fazer exception para tratar a quantidade negativa
+
             new RuntimeException("Não há estoque o suficiente");
             return null;
         }
