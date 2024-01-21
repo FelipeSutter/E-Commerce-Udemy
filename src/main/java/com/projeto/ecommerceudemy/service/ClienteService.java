@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projeto.ecommerceudemy.exception.NoSuchElementException;
 import com.projeto.ecommerceudemy.model.Cliente;
 import com.projeto.ecommerceudemy.repository.ClienteRepository;
 import com.projeto.ecommerceudemy.shared.ClienteDTO;
@@ -36,7 +37,9 @@ public class ClienteService {
 
         Optional<Cliente> cliente = repository.findById(id);
 
-        // TODO: Fazer verificação p/ ver se o id existe ou não e colocar exception
+        if (cliente.isEmpty()) {
+            throw new NoSuchElementException("Cliente", id);
+        }
 
         ClienteDTO dto = new ModelMapper().map(cliente.get(), ClienteDTO.class);
 
@@ -63,8 +66,7 @@ public class ClienteService {
         Optional<Cliente> clienteExiste = repository.findById(id);
 
         if (clienteExiste.isEmpty()) {
-            throw new RuntimeException(
-                    "Não foi possível atualizar o produto com o id " + id + " pois ele não existe.");
+            throw new NoSuchElementException("Cliente", id);
         }
 
         clienteDTO.setId(id);
@@ -81,8 +83,7 @@ public class ClienteService {
         Optional<Cliente> cliente = repository.findById(id);
 
         if (cliente.isEmpty()) {
-            throw new RuntimeException(
-                    "Não foi possível deletar o produto com o id " + id + " pois ele não existe.");
+            throw new NoSuchElementException("Cliente", id);
         }
 
         repository.deleteById(id);
